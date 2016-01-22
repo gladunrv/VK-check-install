@@ -1,41 +1,47 @@
 # VK-check-install
 Скрипт проверяет пользователей установивших Ваше приложение Вконтакте
 
-За один запуск скрипт обходит до 6К пользователей.
+За один запуск скрипт проверяет до 12К пользователей.
 
-Счетчик устанавливается только в том случае, если пользователь добавил приложение в левое меню со страницы приложения, списка приложений или настроек.
 
 НАСТРОЙКА
 -------------------
-Структура таблицы `counter`
+Структура таблицы `check_install`
 ~~~
-CREATE TABLE IF NOT EXISTS `counter` (
-  `id` int(11) NOT NULL,
-  `add` int(11) NOT NULL,
-  `err` int(11) NOT NULL,
-  `start_id` int(11) NOT NULL,
-  `start_time` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `check_install` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `added` int(11) NOT NULL DEFAULT '0',
+  `start_id` int(11) NOT NULL DEFAULT '0',
+  `start_time` int(11) NOT NULL DEFAULT '0',
+  `message` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ~~~
-Дамп
+Дамп таблицы
 ~~~
-INSERT INTO `counter` (`id`, `add`, `err`, `start_id`, `start_time`) VALUES
-(1, 0, 0, 0, 0);
+INSERT INTO `check_install` (`id`, `added`, `start_id`, `start_time`, `message`) VALUES
+(1, 0, 0, 0, '');
+
+~~~Структура таблицы `check_users`
 ~~~
+CREATE TABLE IF NOT EXISTS `check_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+~~~
+
 в cron.php
 ```php
 <?php
 // ...
-  $counter = new setCounter(
-    array(
-    		'setCounter'      => 3,
-    		'countRounds'     => 30,
-    		'intervalRounds'  => 10000, // 0.01 * 1000000 int micro_seconds
-    		'period'          => 86400 	// 1 * 24 * 60 * 60  
+	$CheckInstall = new CheckInstall( 
+		array(
+			'countRounds' => 60,
+			'intervalRounds' => 2000
     ),
     true
   );
-  $counter -> start();
+  $CheckInstall -> start();
 ```
 
