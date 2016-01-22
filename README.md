@@ -44,4 +44,4 @@ CREATE TABLE IF NOT EXISTS `check_users` (
   );
   $CheckInstall -> start();
 ```
-
+запускаем cron.php раз в минуту)
