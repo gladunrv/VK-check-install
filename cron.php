@@ -5,7 +5,12 @@
 	include './classes/vkapi.class.php';
 	include './classes/checkInstall.class.php';
 
-	$counter = new checkInstall( array('setCounter' => 1) );
-	$counter -> start();
+	$CheckInstall = new CheckInstall( 
+		array(
+			'countRounds' => 60,
+			'intervalRounds' => 2000
+		)
+	);
+	$CheckInstall -> start();
 	
 ?>
