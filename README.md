@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS `check_install` (
 ~~~
 INSERT INTO `check_install` (`id`, `added`, `start_id`, `start_time`, `message`) VALUES
 (1, 0, 0, 0, '');
-
-~~~Структура таблицы `check_users`
+~~~
+Структура таблицы `check_users`
 ~~~
 CREATE TABLE IF NOT EXISTS `check_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
