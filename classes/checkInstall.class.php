@@ -124,7 +124,7 @@ class CheckInstall {
     }
 
     public function startOver(){
-		$result = mysql_query("UPDATE `counter` SET `added` =  '0', `start_id` =  '0', `start_time` =  '". time() ."' WHERE `id` = 1");
+		$result = mysql_query("UPDATE `check_install` SET `added` =  '0', `start_id` =  '0', `start_time` =  '". time() ."' WHERE `id` = 1");
 		die('startOver');
     }
 }
